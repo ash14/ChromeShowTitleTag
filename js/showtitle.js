@@ -132,8 +132,10 @@ var chrome_title_tag = {
         this.get_position();
         this.add_handlers();
 
-        var observer = new MutationObserver(this.set_title);
-        observer.observe(document.querySelector('title'), { childList: true });
+        var htmltitle = document.querySelector('title');
+        if (htmltitle) {
+            new MutationObserver(this.set_title).observe(htmltitle, { childList: true });
+        }
 
         setInterval("chrome_title_tag.get_position()", 2000);
     }
